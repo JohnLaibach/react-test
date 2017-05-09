@@ -10,7 +10,9 @@ class BulletChart extends Component {
     render() {
         return (
             <svg width="1100" height="500">
-                <Description />
+                <g>
+                    <Description />
+                </g>
             </svg>
         );
     }
