@@ -13,7 +13,7 @@ class Description extends Component {
             textAnchor: 'end'
         };
         const translate = 'translate(223, 24)';
-        const link = 'http://google.com';
+        const link = this.props.link;
         const titleText = this.props.title;
         const subtitleText = this.props.subtitle;
 
