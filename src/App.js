@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import BulletChart from './components/BulletChart';
+import OverviewDashboardChart from './components/OverviewDashboardChart';
 
 
 class App extends Component {
@@ -14,7 +14,8 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
 
-          <BulletChart />
+          <OverviewDashboardChart title="Quality Composite Score" subtitle="CMS - Medicare Patients Only" mainValue="500" secondaryValue="300" />
+          <OverviewDashboardChart title="Complications" subtitle="% of Patients" mainValue="50" secondaryValue="200" />
 
       </div>
     );

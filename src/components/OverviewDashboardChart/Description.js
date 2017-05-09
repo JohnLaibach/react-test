@@ -9,13 +9,16 @@ class Description extends Component {
     }
 
     render() {
-        const translate = 'translate(200, 300)';
+        const style = {
+            textAnchor: 'end'
+        };
+        const translate = 'translate(223, 24)';
         const link = 'http://google.com';
-        const titleText = 'Title';
-        const subtitleText = 'Subtitle';
+        const titleText = this.props.title;
+        const subtitleText = this.props.subtitle;
 
         return (
-            <g transform={translate}>
+            <g transform={translate} style={style}>
                 <a href={link}>
                     <Title text={titleText} />
                     <Subtitle text={subtitleText} />
