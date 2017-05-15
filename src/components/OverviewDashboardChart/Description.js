@@ -4,9 +4,6 @@ import Subtitle from './Subtitle';
 
 
 class Description extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const style = {

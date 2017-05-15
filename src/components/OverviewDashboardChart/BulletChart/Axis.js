@@ -3,20 +3,8 @@ import * as d3 from 'd3';
 
 
 class Axis extends Component {
-    constructor(props) {
-        super(props);
 
-
-    }
-
-    render() {
-        const style = {
-            shapeRendering: 'crispEdges',
-            fontSize: 12,
-            opacity: 1,
-            fill: '#8f9fad'
-        };
-
+    createAxis() {
         const ticks = this.props.ticks;
         const tickValues = this.props.tickValues;
         const range = this.props.range;
@@ -26,8 +14,7 @@ class Axis extends Component {
             .domain(range)
             .range([0, 535]);
 
-
-        let axis = ticks.map(function (d, i) {
+        return ticks.map(function (d, i) {
             let tick = scaleX(d);
             let transform = "translate(" + tick + ",0)";
 
@@ -52,6 +39,17 @@ class Axis extends Component {
                 </g>
             );
         });
+    }
+
+    render() {
+        const style = {
+            shapeRendering: 'crispEdges',
+            fontSize: 12,
+            opacity: 1,
+            fill: '#8f9fad'
+        };
+
+        let axis = this.createAxis();
 
         return (
             <g transform="translate(283, 32)" style={style}>

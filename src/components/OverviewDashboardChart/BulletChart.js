@@ -8,8 +8,20 @@ import Marker from './BulletChart/Marker';
 
 
 class BulletChart extends Component {
-    constructor(props) {
-        super(props);
+
+    updateMarkers() {
+        let scaleX = d3.scaleLinear()
+                .domain(this.props.range)
+                .range([0, 535]);
+
+        return this.props.markers.map(function (d, i) {
+            let markerTick = scaleX(d.tick);
+            let title = d.tickValue + ' (' + d.numPatients + ' patients)';
+
+            return (
+                <Marker key={i} letter="H" tick={markerTick} title={title} />
+            );
+        });
     }
 
     render() {
@@ -19,24 +31,24 @@ class BulletChart extends Component {
         const unit = this.props.unit;
 
         const scaleX = d3.scaleLinear()
-            .domain(range)
-            .range([0, 535]);
+                .domain(this.props.range)
+                .range([0, 535]);
 
-        const mainValue = scaleX(this.props.mainValue);
-        const secondaryValue = scaleX(this.props.secondaryValue);
+        const mainTick = scaleX(this.props.data.mainTick);
+        const secondaryTick = scaleX(this.props.data.secondaryTick);
 
-        let markerTick = '';
+        const mainTitle = this.props.data.mainValue + ' (' + this.props.data.mainNumPatients + ' patients)';
+        const secondaryTitle = this.props.data.secondaryValue + ' (' + this.props.data.secondaryNumPatients + ' patients)';
 
-        if(this.props.markers.length === 1)
-            markerTick = scaleX(this.props.markers[0].tick);
+        let markers = this.updateMarkers();
 
         return (
             <g>
                 <Background />
                 <Axis ticks={ticks} tickValues={tickValues} range={range} unit={unit} />
-                <Bar fill="#edecb6" y="0" width={secondaryValue} height="8" />
-                <Bar fill="#91afd5" y="8" width={mainValue} height="16" />
-                <Marker letter="H" tick={markerTick} tickValue="50" />
+                <Bar fill="#edecb6" y="0" width={secondaryTick} height="8" title={secondaryTitle} />
+                <Bar fill="#91afd5" y="8" width={mainTick} height="16" title={mainTitle} />
+                {markers}
             </g>
         );
     }

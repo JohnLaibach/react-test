@@ -3,411 +3,258 @@ import logo from './logo.svg';
 import './App.css';
 
 import OverviewDashboardChart from './components/OverviewDashboardChart';
+import Button from './components/Button';
+import Multiselect from 'react-bootstrap-multiselect';
 
 
 class App extends Component {
-  render() {
-      const data = {
-          "status":0,
-          "hard_coded":true,
-          "title":"Quality Composite Score",
-          "subtitle":"CMS - Medicare Patients Only",
-          "risk_adjusted":false,
-          "link":"/patient/cms-quality-measure-scores/?drg=470",
-          "reverse":false,
-          "show_box_improvement":true,
-          "range":[
-              0,
-              100
-          ],
-          "ticks":[
-              10.0,
-              25.0,
-              50.0,
-              75.0,
-              90.0
-          ],
-          "tick_values":[
-              2.0,
-              5.0,
-              10.0,
-              15.0,
-              18.0
-          ],
-          "units":"",
-          "decimal_places":null,
-          "baseline_tick":47.0,
-          "last_12_months_tick":50.0,
-          "last_quarter_tick":89.0,
-          "last_month_tick":60.0,
-          "year_to_date_tick":22.0,
-          "surgeon_tick":-1.0,
-          "compare_tick":-1.0,
-          "baseline_value":9.4,
-          "last_12_months_value":10.0,
-          "last_quarter_value":17.8,
-          "last_month_value":12.0,
-          "year_to_date_value":4.4,
-          "surgeon_value":-1.0,
-          "compare_value":-1.0,
-          "baseline_patients":45.0,
-          "last_12_months_patients":123.0,
-          "last_quarter_patients":65.0,
-          "last_month_patients":32.0,
-          "year_to_date_patients":45.0,
-          "surgeon_patients":-1.0,
-          "trend":[
-          ],
-          "compare_patients":-1.0,
-          "percentiles":{
-          },
-          "hospital_system":{
-              "year_to_date":{
-                  "val":4.0920000000000005,
-                  "patients":45,
-                  "tick":20.46
-              },
-              "last_12_months":{
-                  "val":9.3,
-                  "patients":123,
-                  "tick":46.5
-              },
-              "last_quarter":{
-                  "val":16.554000000000002,
-                  "patients":65,
-                  "tick":82.77000000000001
-              },
-              "last_month":{
-                  "val":11.16,
-                  "patients":32,
-                  "tick":55.800000000000004
-              }
-          },
-          "group_organizations":[
-          ]
-      };
+    constructor(props) {
+        super(props);
 
-      const data2 = {
-           "status":0,
-           "hard_coded":false,
-           "title":"— Personnel",
-           "subtitle":"$ / Patient",
-           "risk_adjusted":false,
-           "link":"/metric-details/personnel/?drg=470",
-           "reverse":true,
-           "show_box_improvement":true,
-           "range":[
-              0,
-              100
-           ],
-           "ticks":[
-              10,
-              25,
-              50,
-              75,
-              90
-           ],
-           "tick_values":[
-              4440.9087755850815,
-              4284.7199786001775,
-              3624.1854210297543,
-              3372.6833332556557,
-              2525.5314515090263
-           ],
-           "units":"$",
-           "decimal_places":0,
-           "baseline_tick":51.86830499897616,
-           "last_12_months_tick":56.747122572199004,
-           "last_quarter_tick":80.89695764589857,
-           "last_month_tick":86.93229997499914,
-           "year_to_date_tick":80.89695764589857,
-           "surgeon_tick":-1.0,
-           "compare_tick":-1.0,
-           "baseline_value":3568.51430092,
-           "last_12_months_value":3492.92708498,
-           "last_quarter_value":3220.83216801,
-           "last_month_value":2843.08480242,
-           "year_to_date_value":3220.83216801,
-           "surgeon_value":-1.0,
-           "compare_value":-1.0,
-           "baseline_patients":982.0,
-           "last_12_months_patients":1212.0,
-           "last_quarter_patients":372.0,
-           "last_month_patients":124.0,
-           "year_to_date_patients":372.0,
-           "surgeon_patients":-1.0,
-           "trend":[
-              {
-                 "Date":"2017-01-01",
-                 "TotalHospitalStayPersonnelCost":3169.09685897
-              },
-              {
-                 "Date":"2017-01-08",
-                 "TotalHospitalStayPersonnelCost":3579.82167308
-              },
-              {
-                 "Date":"2017-01-15",
-                 "TotalHospitalStayPersonnelCost":3445.08342308
-              },
-              {
-                 "Date":"2017-01-22",
-                 "TotalHospitalStayPersonnelCost":3367.341625
-              },
-              {
-                 "Date":"2017-01-29",
-                 "TotalHospitalStayPersonnelCost":3419.80647727
-              },
-              {
-                 "Date":"2017-02-05",
-                 "TotalHospitalStayPersonnelCost":3527.79155357
-              },
-              {
-                 "Date":"2017-02-12",
-                 "TotalHospitalStayPersonnelCost":3689.73890385
-              },
-              {
-                 "Date":"2017-02-19",
-                 "TotalHospitalStayPersonnelCost":3330.95613953
-              },
-              {
-                 "Date":"2017-02-26",
-                 "TotalHospitalStayPersonnelCost":2918.046125
-              },
-              {
-                 "Date":"2017-03-05",
-                 "TotalHospitalStayPersonnelCost":2901.13837931
-              },
-              {
-                 "Date":"2017-03-12",
-                 "TotalHospitalStayPersonnelCost":3144.99808333
-              },
-              {
-                 "Date":"2017-03-19",
-                 "TotalHospitalStayPersonnelCost":2713.24238235
-              },
-              {
-                 "Date":"2017-03-26",
-                 "TotalHospitalStayPersonnelCost":2797.57941304
-              },
-              {
-                 "Date":"2016-04-03",
-                 "TotalHospitalStayPersonnelCost":3334.71857143
-              },
-              {
-                 "Date":"2016-04-10",
-                 "TotalHospitalStayPersonnelCost":3338.79722222
-              },
-              {
-                 "Date":"2016-04-17",
-                 "TotalHospitalStayPersonnelCost":3313.26570833
-              },
-              {
-                 "Date":"2016-04-24",
-                 "TotalHospitalStayPersonnelCost":3373.62128125
-              },
-              {
-                 "Date":"2016-05-01",
-                 "TotalHospitalStayPersonnelCost":3254.43865909
-              },
-              {
-                 "Date":"2016-05-08",
-                 "TotalHospitalStayPersonnelCost":3223.61180952
-              },
-              {
-                 "Date":"2016-05-15",
-                 "TotalHospitalStayPersonnelCost":3285.38630952
-              },
-              {
-                 "Date":"2016-05-22",
-                 "TotalHospitalStayPersonnelCost":3306.71576316
-              },
-              {
-                 "Date":"2016-05-29",
-                 "TotalHospitalStayPersonnelCost":3265.11473529
-              },
-              {
-                 "Date":"2016-06-05",
-                 "TotalHospitalStayPersonnelCost":3207.36284375
-              },
-              {
-                 "Date":"2016-06-12",
-                 "TotalHospitalStayPersonnelCost":3313.17782143
-              },
-              {
-                 "Date":"2016-06-19",
-                 "TotalHospitalStayPersonnelCost":3426.7685
-              },
-              {
-                 "Date":"2016-06-26",
-                 "TotalHospitalStayPersonnelCost":3229.35445238
-              },
-              {
-                 "Date":"2016-07-03",
-                 "TotalHospitalStayPersonnelCost":3608.00879412
-              },
-              {
-                 "Date":"2016-07-10",
-                 "TotalHospitalStayPersonnelCost":3472.68596667
-              },
-              {
-                 "Date":"2016-07-17",
-                 "TotalHospitalStayPersonnelCost":3430.57303846
-              },
-              {
-                 "Date":"2016-07-24",
-                 "TotalHospitalStayPersonnelCost":3287.992
-              },
-              {
-                 "Date":"2016-07-31",
-                 "TotalHospitalStayPersonnelCost":3323.8685
-              },
-              {
-                 "Date":"2016-08-07",
-                 "TotalHospitalStayPersonnelCost":3302.11380952
-              },
-              {
-                 "Date":"2016-08-14",
-                 "TotalHospitalStayPersonnelCost":3320.439
-              },
-              {
-                 "Date":"2016-08-21",
-                 "TotalHospitalStayPersonnelCost":3507.81113636
-              },
-              {
-                 "Date":"2016-08-28",
-                 "TotalHospitalStayPersonnelCost":3376.19002273
-              },
-              {
-                 "Date":"2016-09-04",
-                 "TotalHospitalStayPersonnelCost":3531.4096875
-              },
-              {
-                 "Date":"2016-09-11",
-                 "TotalHospitalStayPersonnelCost":3551.53857895
-              },
-              {
-                 "Date":"2016-09-18",
-                 "TotalHospitalStayPersonnelCost":3442.30863889
-              },
-              {
-                 "Date":"2016-09-25",
-                 "TotalHospitalStayPersonnelCost":3425.03078571
-              },
-              {
-                 "Date":"2016-10-02",
-                 "TotalHospitalStayPersonnelCost":3813.08120238
-              },
-              {
-                 "Date":"2016-10-09",
-                 "TotalHospitalStayPersonnelCost":4167.94740741
-              },
-              {
-                 "Date":"2016-10-16",
-                 "TotalHospitalStayPersonnelCost":3948.26301852
-              },
-              {
-                 "Date":"2016-10-23",
-                 "TotalHospitalStayPersonnelCost":3865.38791667
-              },
-              {
-                 "Date":"2016-10-30",
-                 "TotalHospitalStayPersonnelCost":3768.42621951
-              },
-              {
-                 "Date":"2016-11-06",
-                 "TotalHospitalStayPersonnelCost":3980.90716667
-              },
-              {
-                 "Date":"2016-11-13",
-                 "TotalHospitalStayPersonnelCost":3949.83554
-              },
-              {
-                 "Date":"2016-11-20",
-                 "TotalHospitalStayPersonnelCost":3904.74124
-              },
-              {
-                 "Date":"2016-11-27",
-                 "TotalHospitalStayPersonnelCost":4171.00541667
-              },
-              {
-                 "Date":"2016-12-04",
-                 "TotalHospitalStayPersonnelCost":3713.57231944
-              },
-              {
-                 "Date":"2016-12-11",
-                 "TotalHospitalStayPersonnelCost":4073.0860625
-              },
-              {
-                 "Date":"2016-12-18",
-                 "TotalHospitalStayPersonnelCost":3794.01255357
-              },
-              {
-                 "Date":"2016-12-25",
-                 "TotalHospitalStayPersonnelCost":3839.59538571
-              }
-           ],
-           "compare_patients":-1.0,
-           "percentiles":{
-              "90":{
-                 "tick":90,
-                 "value":2525.5314515090263
-              },
-              "75":{
-                 "tick":75,
-                 "value":3372.6833332556557
-              },
-              "10":{
-                 "tick":10,
-                 "value":4440.9087755850815
-              },
-              "50":{
-                 "tick":50,
-                 "value":3624.1854210297543
-              },
-              "25":{
-                 "tick":25,
-                 "value":4284.7199786001775
-              }
-           },
-           "hospital_system":{
-              "last_quarter":{
-                 "tick":53.6720244473678,
-                 "val":3622.12325231,
-                 "patients":2812
-              },
-              "last_12_months":{
-                 "tick":50.593159751736984,
-                 "val":3716.66843111,
-                 "patients":10931
-              },
-              "last_month":{
-                 "tick":65.08820360996981,
-                 "val":3533.53894972,
-                 "patients":905
-              },
-              "year_to_date":{
-                 "tick":83.4708357677857,
-                 "val":3220.83216801,
-                 "patients":372
-              }
-           },
-           "group_organizations":{
-
-           }
+        this.state = {
+            data: {
+                "status":0,
+                "hard_coded":true,
+                "title":"Quality Composite Score",
+                "subtitle":"CMS - Medicare Patients Only",
+                "risk_adjusted":false,
+                "link":"/patient/cms-quality-measure-scores/?drg=470",
+                "reverse":false,
+                "show_box_improvement":true,
+                "range":[
+                  0,
+                  100
+                ],
+                "ticks":[
+                  10.0,
+                  25.0,
+                  50.0,
+                  75.0,
+                  90.0
+                ],
+                "tick_values":[
+                  2.0,
+                  5.0,
+                  10.0,
+                  15.0,
+                  18.0
+                ],
+                "units":"",
+                "decimal_places":null,
+                "baseline_tick":47.0,
+                "last_12_months_tick":50.0,
+                "last_quarter_tick":89.0,
+                "last_month_tick":60.0,
+                "year_to_date_tick":22.0,
+                "surgeon_tick":-1.0,
+                "compare_tick":-1.0,
+                "baseline_value":9.4,
+                "last_12_months_value":10.0,
+                "last_quarter_value":17.8,
+                "last_month_value":12.0,
+                "year_to_date_value":4.4,
+                "surgeon_value":-1.0,
+                "compare_value":-1.0,
+                "baseline_patients":45.0,
+                "last_12_months_patients":123.0,
+                "last_quarter_patients":65.0,
+                "last_month_patients":32.0,
+                "year_to_date_patients":45.0,
+                "surgeon_patients":-1.0,
+                "trend":[
+                ],
+                "compare_patients":-1.0,
+                "percentiles":{
+                },
+                "hospital_system":{
+                  "year_to_date":{
+                      "val":4.0920000000000005,
+                      "patients":45,
+                      "tick":20.46
+                  },
+                  "last_12_months":{
+                      "val":9.3,
+                      "patients":123,
+                      "tick":46.5
+                  },
+                  "last_quarter":{
+                      "val":16.554000000000002,
+                      "patients":65,
+                      "tick":82.77000000000001
+                  },
+                  "last_month":{
+                      "val":11.16,
+                      "patients":32,
+                      "tick":55.800000000000004
+                  }
+                },
+                "group_organizations":[
+                ]
+                },
+            timePeriods: [
+                {
+                    value: 1,
+                    label: 'Most Recent Month'
+                },
+                {
+                    value: 2,
+                    label: 'Most Recent 3 Months'
+                },
+                {
+                    value: 3,
+                    label: 'Most Recent 12 Months'
+                },
+                {
+                    value: 0,
+                    label: '2017 Year to Date'
+                }
+            ],
+            selectedTimePeriod: 1
         };
-    return (
-        <div className="App">
-            <div className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <h2>Welcome to React</h2>
+
+        this.handleClick = this.handleClick.bind(this);
+        this.handleChangeFilter = this.handleChangeFilter.bind(this);
+
+        this.handleChangeTimePeriod = this.handleChangeTimePeriod.bind(this);
+    }
+
+    handleClick() {
+        this.setState({
+            data: {
+                "status": 0,
+                "hard_coded": false,
+                "title": "— Personnel",
+                "subtitle": "$ / Patient",
+                "risk_adjusted": false,
+                "link": "/metric-details/personnel/?drg=470",
+                "reverse": true,
+                "show_box_improvement": true,
+                "range": [
+                  0,
+                  100
+                ],
+                "ticks": [
+                  10,
+                  25,
+                  50,
+                  75,
+                  90
+                ],
+                "tick_values": [
+                  4440.9087755850815,
+                  4284.7199786001775,
+                  3624.1854210297543,
+                  3372.6833332556557,
+                  2525.5314515090263
+                ],
+                "units": "$",
+                "decimal_places": 0,
+                "baseline_tick": 51.86830499897616,
+                "last_12_months_tick": 56.747122572199004,
+                "last_quarter_tick": 80.89695764589857,
+                "last_month_tick": 86.93229997499914,
+                "year_to_date_tick": 80.89695764589857,
+                "surgeon_tick": -1.0,
+                "compare_tick": -1.0,
+                "baseline_value": 3568.51430092,
+                "last_12_months_value": 3492.92708498,
+                "last_quarter_value": 3220.83216801,
+                "last_month_value": 2843.08480242,
+                "year_to_date_value": 3220.83216801,
+                "surgeon_value": -1.0,
+                "compare_value": -1.0,
+                "baseline_patients": 982.0,
+                "last_12_months_patients": 1212.0,
+                "last_quarter_patients": 372.0,
+                "last_month_patients": 124.0,
+                "year_to_date_patients": 372.0,
+                "surgeon_patients": -1.0,
+                "compare_patients": -1.0,
+                "percentiles": {
+                  "90": {
+                      "tick": 90,
+                      "value": 2525.5314515090263
+                  },
+                  "75": {
+                      "tick": 75,
+                      "value": 3372.6833332556557
+                  },
+                  "10": {
+                      "tick": 10,
+                      "value": 4440.9087755850815
+                  },
+                  "50": {
+                      "tick": 50,
+                      "value": 3624.1854210297543
+                  },
+                  "25": {
+                      "tick": 25,
+                      "value": 4284.7199786001775
+                  }
+                },
+                "hospital_system": {
+                  "last_quarter": {
+                      "tick": 53.6720244473678,
+                      "val": 3622.12325231,
+                      "patients": 2812
+                  },
+                  "last_12_months": {
+                      "tick": 50.593159751736984,
+                      "val": 3716.66843111,
+                      "patients": 10931
+                  },
+                  "last_month": {
+                      "tick": 65.08820360996981,
+                      "val": 3533.53894972,
+                      "patients": 905
+                  },
+                  "year_to_date": {
+                      "tick": 83.4708357677857,
+                      "val": 3220.83216801,
+                      "patients": 372
+                  }
+                },
+                "group_organizations": []
+                },
+        });
+    }
+
+    handleChangeTimePeriod() {
+        let selected = [...this.refs.timePeriods.selectRef]
+            .filter(option => option.selected)
+            .map(option => option.value);
+
+        this.setState({
+            selectedTimePeriod: parseInt(selected[0], 10)
+        });
+    }
+
+    handleChangeFilter() {
+        return {
+            timePeriod: this.state.selectedTimePeriod
+        }
+    }
+
+    render() {
+
+        return (
+            <div className="App">
+                <div className="App-header">
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <h2>Welcome to React</h2>
+                </div>
+
+                <OverviewDashboardChart data={this.state.data} filters={this.handleChangeFilter} />
+
+                <p>
+                    <Button onClick={this.handleClick} />
+                </p>
+
+                <Multiselect data={this.state.timePeriods} onChange={this.handleChangeTimePeriod} ref="timePeriods" />
+
             </div>
-
-            <OverviewDashboardChart data={data} />
-            <OverviewDashboardChart data={data2} />
-
-      </div>
-    );
-  }
+        );
+    }
 }
 
 export default App;
