@@ -9,23 +9,27 @@ class Axis extends Component {
         const tickValues = this.props.tickValues;
         const range = this.props.range;
         const unit = this.props.unit;
+        const decimalPlaces = this.props.decimalPlaces === null ? 0 : this.props.decimalPlaces;
 
         const scaleX = d3.scaleLinear()
             .domain(range)
             .range([0, 535]);
 
         return ticks.map(function (d, i) {
+
             let tick = scaleX(d);
             let transform = "translate(" + tick + ",0)";
 
             let text = '';
 
-            if (unit === "$") {
-                text = unit + tickValues[i].toFixed(0);
-            } else if (unit === "%") {
-                text = tickValues[i] + unit;
-            } else {
-                text = tickValues[i];
+            if (tickValues[i] !== null) {
+                if (unit === "$") {
+                    text = unit + tickValues[i].toFixed(decimalPlaces);
+                } else if (unit === "%") {
+                    text = tickValues[i].toFixed(decimalPlaces) + unit;
+                } else {
+                    text = tickValues[i].toFixed(decimalPlaces);
+                }
             }
 
             return (

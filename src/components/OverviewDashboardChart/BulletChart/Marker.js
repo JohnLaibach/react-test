@@ -4,8 +4,9 @@ import React, { Component } from 'react';
 class Marker extends Component {
 
     render() {
+
         const markerStyle = {
-            fill: '#596a7a',
+            fill: this.props.color !== undefined ? this.props.color : '#596a7a',
             transition: 'all 1s ease'
         };
 

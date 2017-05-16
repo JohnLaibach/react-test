@@ -9,17 +9,18 @@ import Marker from './BulletChart/Marker';
 
 class BulletChart extends Component {
 
-    updateMarkers() {
-        let scaleX = d3.scaleLinear()
+    createMarkers() {
+        const scaleX = d3.scaleLinear()
                 .domain(this.props.range)
                 .range([0, 535]);
 
         return this.props.markers.map(function (d, i) {
-            let markerTick = scaleX(d.tick);
-            let title = d.tickValue + ' (' + d.numPatients + ' patients)';
+            const markerTick = scaleX(d.tick);
+            const title = d.tickValue + ' (' + d.numPatients + ' patients)';
+            const letter = d.letter !== undefined ? d.letter : 'H';
 
             return (
-                <Marker key={i} letter="H" tick={markerTick} title={title} />
+                <Marker key={i} letter={letter} tick={markerTick} title={title} color={d.color} />
             );
         });
     }
@@ -35,19 +36,24 @@ class BulletChart extends Component {
                 .range([0, 535]);
 
         const mainTick = scaleX(this.props.data.mainTick);
-        const secondaryTick = scaleX(this.props.data.secondaryTick);
-
         const mainTitle = this.props.data.mainValue + ' (' + this.props.data.mainNumPatients + ' patients)';
+
+        const secondaryTick = this.props.data.secondaryTick > -1 ? scaleX(this.props.data.secondaryTick) : null;
         const secondaryTitle = this.props.data.secondaryValue + ' (' + this.props.data.secondaryNumPatients + ' patients)';
 
-        let markers = this.updateMarkers();
+        const mainY = secondaryTick !== null ? 8 : 0;
+        const mainHeight = secondaryTick !== null ? 16 : 24;
+
+        const markers = this.createMarkers();
+
+        const mainBarFill = markers.length > 1 ? '#edecb6' : '#91afd5';
 
         return (
             <g>
                 <Background />
-                <Axis ticks={ticks} tickValues={tickValues} range={range} unit={unit} />
-                <Bar fill="#edecb6" y="0" width={secondaryTick} height="8" title={secondaryTitle} />
-                <Bar fill="#91afd5" y="8" width={mainTick} height="16" title={mainTitle} />
+                <Axis ticks={ticks} tickValues={tickValues} range={range} unit={unit} decimalPlaces={this.props.decimalPlaces} />
+                (secondaryTick && <Bar fill="#edecb6" y="0" width={secondaryTick} height="8" title={secondaryTitle} />)
+                <Bar fill={mainBarFill} y={mainY} width={mainTick} height={mainHeight} title={mainTitle} />
                 {markers}
             </g>
         );

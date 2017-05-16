@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import data from './data3.json';
 
 import OverviewDashboardChart from './components/OverviewDashboardChart';
 import Button from './components/Button';
@@ -11,86 +12,10 @@ class App extends Component {
     constructor(props) {
         super(props);
 
+        const charts = data[2].bullet_charts;
+
         this.state = {
-            data: {
-                "status":0,
-                "hard_coded":true,
-                "title":"Quality Composite Score",
-                "subtitle":"CMS - Medicare Patients Only",
-                "risk_adjusted":false,
-                "link":"/patient/cms-quality-measure-scores/?drg=470",
-                "reverse":false,
-                "show_box_improvement":true,
-                "range":[
-                  0,
-                  100
-                ],
-                "ticks":[
-                  10.0,
-                  25.0,
-                  50.0,
-                  75.0,
-                  90.0
-                ],
-                "tick_values":[
-                  2.0,
-                  5.0,
-                  10.0,
-                  15.0,
-                  18.0
-                ],
-                "units":"",
-                "decimal_places":null,
-                "baseline_tick":47.0,
-                "last_12_months_tick":50.0,
-                "last_quarter_tick":89.0,
-                "last_month_tick":60.0,
-                "year_to_date_tick":22.0,
-                "surgeon_tick":-1.0,
-                "compare_tick":-1.0,
-                "baseline_value":9.4,
-                "last_12_months_value":10.0,
-                "last_quarter_value":17.8,
-                "last_month_value":12.0,
-                "year_to_date_value":4.4,
-                "surgeon_value":-1.0,
-                "compare_value":-1.0,
-                "baseline_patients":45.0,
-                "last_12_months_patients":123.0,
-                "last_quarter_patients":65.0,
-                "last_month_patients":32.0,
-                "year_to_date_patients":45.0,
-                "surgeon_patients":-1.0,
-                "trend":[
-                ],
-                "compare_patients":-1.0,
-                "percentiles":{
-                },
-                "hospital_system":{
-                  "year_to_date":{
-                      "val":4.0920000000000005,
-                      "patients":45,
-                      "tick":20.46
-                  },
-                  "last_12_months":{
-                      "val":9.3,
-                      "patients":123,
-                      "tick":46.5
-                  },
-                  "last_quarter":{
-                      "val":16.554000000000002,
-                      "patients":65,
-                      "tick":82.77000000000001
-                  },
-                  "last_month":{
-                      "val":11.16,
-                      "patients":32,
-                      "tick":55.800000000000004
-                  }
-                },
-                "group_organizations":[
-                ]
-                },
+            data: charts,
             timePeriods: [
                 {
                     value: 1,
@@ -112,9 +37,10 @@ class App extends Component {
             selectedTimePeriod: 1
         };
 
+        this.createCharts = this.createCharts.bind(this);
+
         this.handleClick = this.handleClick.bind(this);
         this.handleChangeFilter = this.handleChangeFilter.bind(this);
-
         this.handleChangeTimePeriod = this.handleChangeTimePeriod.bind(this);
     }
 
@@ -235,7 +161,19 @@ class App extends Component {
         }
     }
 
+    createCharts() {
+        const handleChangeFilter = this.handleChangeFilter;
+
+        return this.state.data.map(function (obj, i) {
+            return (
+                <OverviewDashboardChart key={i} data={obj} filters={handleChangeFilter} />
+            );
+        });
+    }
+
     render() {
+
+        const charts = this.createCharts();
 
         return (
             <div className="App">
@@ -244,7 +182,7 @@ class App extends Component {
                     <h2>Welcome to React</h2>
                 </div>
 
-                <OverviewDashboardChart data={this.state.data} filters={this.handleChangeFilter} />
+                {charts}
 
                 <p>
                     <Button onClick={this.handleClick} />
