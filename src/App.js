@@ -3,9 +3,11 @@ import logo from './logo.svg';
 import './App.css';
 import data from './data3.json';
 
-import OverviewDashboardChart from './components/OverviewDashboardChart';
+//import OverviewDashboardChart from './components/OverviewDashboardChart';
 import Button from './components/Button';
 import Multiselect from 'react-bootstrap-multiselect';
+import Fiter from './components/Filter';
+import Filter from './components/Filter';
 
 
 class App extends Component {
@@ -37,7 +39,7 @@ class App extends Component {
             selectedTimePeriod: 1
         };
 
-        this.createCharts = this.createCharts.bind(this);
+        //this.createCharts = this.createCharts.bind(this);
 
         this.handleClick = this.handleClick.bind(this);
         this.handleChangeFilter = this.handleChangeFilter.bind(this);
@@ -161,7 +163,7 @@ class App extends Component {
         }
     }
 
-    createCharts() {
+    /*createCharts() {
         const handleChangeFilter = this.handleChangeFilter;
 
         return this.state.data.map(function (obj, i) {
@@ -169,11 +171,11 @@ class App extends Component {
                 <OverviewDashboardChart key={i} data={obj} filters={handleChangeFilter} />
             );
         });
-    }
+    }*/
 
     render() {
 
-        const charts = this.createCharts();
+        //const charts = this.createCharts();
 
         return (
             <div className="App">
@@ -182,14 +184,15 @@ class App extends Component {
                     <h2>Welcome to React</h2>
                 </div>
 
-                {charts}
+                
 
                 <p>
                     <Button onClick={this.handleClick} />
                 </p>
-
+                
                 <Multiselect data={this.state.timePeriods} onChange={this.handleChangeTimePeriod} ref="timePeriods" />
-
+                
+                <Filter data={this.state.timePeriods} type="multi" />
             </div>
         );
     }
