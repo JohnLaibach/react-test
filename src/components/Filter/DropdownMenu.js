@@ -22,7 +22,7 @@ export default class DropdownMenu extends React.Component {
 
         return (
             <ul style={style}>
-                {Object.values(this.props.items).map((item, i) => <MenuItem key={i} data={item} type={this.props.type} onChangeHandler={this.props.onChangeHandler} />)}
+                {this.props.items.map((item, i) => <MenuItem key={i} data={item} type={this.props.type} onChangeHandler={this.props.onChangeHandler} selected={this.props.selectedItems.includes(item.value)} />)}
             </ul>
         );
     }

@@ -27,13 +27,19 @@ class Filter extends Component {
             width: '100%'
         }
 
+        let buttonTitle = '';
+        const selectedItems = this.props.selectedItems;
+        this.props.data.map(function(item) {
+            if(selectedItems.includes(item.value))
+                buttonTitle += item.label + ' ';
+        });
+
         return (
             <div className="col-lg-3 col-sm-6">
                 <Header title={this.props.title} />
                 <div className="input-group" style={inputGroupStyle}>
-                    <input type="hidden" />
-                    <ToggleButton onClickHandler={this.handleToggleButtonClick} />
-                    <DropdownMenu items={this.props.data} type={this.props.type} isOpen={this.state.isOpen} onChangeHandler={this.props.handleChange} />
+                    <ToggleButton onClickHandler={this.handleToggleButtonClick} title={buttonTitle} />
+                    <DropdownMenu items={this.props.data} type={this.props.type} isOpen={this.state.isOpen} onChangeHandler={this.props.handleChange} selectedItems={this.props.selectedItems} />
                 </div>
             </div>
         );

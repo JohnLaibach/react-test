@@ -27,7 +27,7 @@ export default class ToggleButton extends React.Component {
 
         return (
             <button style={buttonStyle} onClick={this.props.onClickHandler}>
-                <span>Nekaj</span>
+                <span>{this.props.title}</span>
                 <b className="caret" style={caretStyle}></b>
             </button>
         );

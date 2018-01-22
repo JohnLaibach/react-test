@@ -17,28 +17,25 @@ class App extends Component {
 
         this.state = {
             data: charts,
-            timePeriods: {
-                1: {
+            timePeriods: [
+                {
                     value: 1,
-                    label: 'Most Recent Month',
-                    selected: true
+                    label: 'Most Recent Month'
                 },
-                2: {
+                {
                     value: 2,
-                    label: 'Most Recent 3 Months',
-                    selected: false
+                    label: 'Most Recent 3 Months'
                 },
-                3: {
+                {
                     value: 3,
-                    label: 'Most Recent 12 Months',
-                    selected: false
+                    label: 'Most Recent 12 Months'
                 },
-                0: {
+                {
                     value: 0,
-                    label: '2017 Year to Date',
-                    selected: false
+                    label: '2017 Year to Date'
                 }
-            }
+            ],
+            selectedTimePeriod: 1
         };
 
         //this.createCharts = this.createCharts.bind(this);
@@ -149,7 +146,10 @@ class App extends Component {
     }
 
     handleChangeTimePeriod = (param) => (e) => {
-        this.state.timePeriods[param].selected = !this.state.timePeriods[param].selected;
+        this.setState({
+            selectedTimePeriod: param
+        });
+        console.log(param);
     }
 
     handleChangeFilter() {
@@ -185,7 +185,7 @@ class App extends Component {
                     <Button onClick={this.handleClick} />
                 </p>
                 
-                <Filter title="Time Period" data={this.state.timePeriods} type="single" handleChange={this.handleChangeTimePeriod} name="time-period" />
+                <Filter title="Time Period" data={this.state.timePeriods} type="single" handleChange={this.handleChangeTimePeriod} selectedItems={[this.state.selectedTimePeriod]} />
             </div>
         );
     }

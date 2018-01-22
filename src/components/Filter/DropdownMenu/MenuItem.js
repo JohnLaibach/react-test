@@ -33,12 +33,12 @@ class MenuItem extends React.Component {
             marginLeft: '-20px',
             marginRight: 0
         }
-
+        
         return (
             <li>
                 <a tabIndex={this.key} style={aStyle}>
                     <label style={labelStyle}>
-                        <input type={type} value={this.props.data.value} style={inputStyle} onChange={this.props.onChangeHandler(this.props.data.value)} />&nbsp;
+                        <input type={type} value={this.props.data.value} style={inputStyle} onChange={this.props.onChangeHandler(this.props.data.value)} checked={this.props.selected} />&nbsp;
                         {this.props.data.label}
                     </label>
                 </a>
