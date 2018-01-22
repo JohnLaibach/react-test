@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 import Header from './Filter/Header'
 import ToggleButton from './Filter/ToggleButton';
 import DropdownMenu from './Filter/DropdownMenu';
@@ -7,11 +8,17 @@ class Filter extends Component {
     constructor(props) {
         super(props);
 
-        this.handleClick = this.handleClick.bind(this);
+        this.state = {
+            isOpen: false
+        }
+
+        this.handleToggleButtonClick = this.handleToggleButtonClick.bind(this);
     }
 
-    handleClick() {
-        this.props.onClick();
+    handleToggleButtonClick() {
+        this.setState(prevState => ({
+            isOpen: !prevState.isOpen
+        }));
     }
 
     render() {
@@ -22,11 +29,11 @@ class Filter extends Component {
 
         return (
             <div className="col-lg-3 col-sm-6">
-                <Header title="Nekaj" />
+                <Header title={this.props.title} />
                 <div className="input-group" style={inputGroupStyle}>
                     <input type="hidden" />
-                    <ToggleButton />
-                    <DropdownMenu items={this.props.data} type={this.props.type} />
+                    <ToggleButton onClickHandler={this.handleToggleButtonClick} />
+                    <DropdownMenu items={this.props.data} type={this.props.type} isOpen={this.state.isOpen} onChangeHandler={this.props.handleChange} />
                 </div>
             </div>
         );

@@ -38,7 +38,7 @@ class MenuItem extends React.Component {
             <li>
                 <a tabIndex={this.key} style={aStyle}>
                     <label style={labelStyle}>
-                        <input type={type} value={this.props.data.value} style={inputStyle} />&nbsp;
+                        <input type={type} value={this.props.data.value} style={inputStyle} onChange={this.props.onChangeHandler(this.props.data.value)} />&nbsp;
                         {this.props.data.label}
                     </label>
                 </a>

@@ -5,11 +5,6 @@ export default class ToggleButton extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick() {
-        
     }
 
     render() {
@@ -31,7 +26,7 @@ export default class ToggleButton extends React.Component {
         }
 
         return (
-            <button style={buttonStyle} onClick={this.handleClick}>
+            <button style={buttonStyle} onClick={this.props.onClickHandler}>
                 <span>Nekaj</span>
                 <b className="caret" style={caretStyle}></b>
             </button>

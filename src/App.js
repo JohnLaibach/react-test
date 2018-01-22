@@ -6,7 +6,6 @@ import data from './data3.json';
 //import OverviewDashboardChart from './components/OverviewDashboardChart';
 import Button from './components/Button';
 import Multiselect from 'react-bootstrap-multiselect';
-import Fiter from './components/Filter';
 import Filter from './components/Filter';
 
 
@@ -18,32 +17,34 @@ class App extends Component {
 
         this.state = {
             data: charts,
-            timePeriods: [
-                {
+            timePeriods: {
+                1: {
                     value: 1,
-                    label: 'Most Recent Month'
+                    label: 'Most Recent Month',
+                    selected: true
                 },
-                {
+                2: {
                     value: 2,
-                    label: 'Most Recent 3 Months'
+                    label: 'Most Recent 3 Months',
+                    selected: false
                 },
-                {
+                3: {
                     value: 3,
-                    label: 'Most Recent 12 Months'
+                    label: 'Most Recent 12 Months',
+                    selected: false
                 },
-                {
+                0: {
                     value: 0,
-                    label: '2017 Year to Date'
+                    label: '2017 Year to Date',
+                    selected: false
                 }
-            ],
-            selectedTimePeriod: 1
+            }
         };
 
         //this.createCharts = this.createCharts.bind(this);
 
         this.handleClick = this.handleClick.bind(this);
         this.handleChangeFilter = this.handleChangeFilter.bind(this);
-        this.handleChangeTimePeriod = this.handleChangeTimePeriod.bind(this);
     }
 
     handleClick() {
@@ -147,14 +148,8 @@ class App extends Component {
         });
     }
 
-    handleChangeTimePeriod() {
-        let selected = [...this.refs.timePeriods.selectRef]
-            .filter(option => option.selected)
-            .map(option => option.value);
-
-        this.setState({
-            selectedTimePeriod: parseInt(selected[0], 10)
-        });
+    handleChangeTimePeriod = (param) => (e) => {
+        this.state.timePeriods[param].selected = !this.state.timePeriods[param].selected;
     }
 
     handleChangeFilter() {
@@ -190,9 +185,7 @@ class App extends Component {
                     <Button onClick={this.handleClick} />
                 </p>
                 
-                <Multiselect data={this.state.timePeriods} onChange={this.handleChangeTimePeriod} ref="timePeriods" />
-                
-                <Filter data={this.state.timePeriods} type="multi" />
+                <Filter title="Time Period" data={this.state.timePeriods} type="single" handleChange={this.handleChangeTimePeriod} name="time-period" />
             </div>
         );
     }
