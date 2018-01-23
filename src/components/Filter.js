@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { setTimePeriod} from "../actions/filters";
 import Header from './Filter/Header'
 import ToggleButton from './Filter/ToggleButton';
 import DropdownMenu from './Filter/DropdownMenu';
@@ -9,7 +10,8 @@ class Filter extends Component {
         super(props);
 
         this.state = {
-            isOpen: false
+            isOpen: false,
+            selectedItems: this.props.selectedItems
         }
 
         this.handleToggleButtonClick = this.handleToggleButtonClick.bind(this);

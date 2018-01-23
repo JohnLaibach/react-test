@@ -19,10 +19,14 @@ export default class DropdownMenu extends React.Component {
             border: '1px solid #EEEEEE',
             display: this.props.isOpen ? 'block' : 'none'
         }
-
+        
+        const type = this.props.type;
+        const items = this.props.items;
+        const selectedItems = this.props.selectedItems;
+        
         return (
             <ul style={style}>
-                {this.props.items.map((item, i) => <MenuItem key={i} data={item} type={this.props.type} onChangeHandler={this.props.onChangeHandler} selected={this.props.selectedItems.includes(item.value)} />)}
+                {items.map((item, i) => <MenuItem key={i} data={item} type={type} onChangeHandler={this.props.onChangeHandler} selected={selectedItems.includes(item.value)} />)}
             </ul>
         );
     }
