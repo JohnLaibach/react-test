@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { setTimePeriod} from "../actions/filters";
 import Header from './Filter/Header'
 import ToggleButton from './Filter/ToggleButton';
 import DropdownMenu from './Filter/DropdownMenu';
 
+const mapStateToProps = state => {
+    return { selectedItems: state.selectedItems }
+};
+
 class Filter extends Component {
     constructor(props) {
         super(props);
+
+        console.log(this.props.selectedItems);
 
         this.state = {
             isOpen: false,
@@ -23,6 +28,10 @@ class Filter extends Component {
         }));
     }
 
+    handleDropdownChange = e => {
+        this.props.handleChange(e.target.value);
+    }
+
     render() {
         
         const inputGroupStyle = {
@@ -31,6 +40,7 @@ class Filter extends Component {
 
         let buttonTitle = '';
         const selectedItems = this.props.selectedItems;
+        console.log(this.props.selectedItems);
         this.props.data.map(function(item) {
             if(selectedItems.includes(item.value))
                 buttonTitle += item.label + ' ';
@@ -48,4 +58,5 @@ class Filter extends Component {
     }
 }
 
-export default Filter;
+const ConnectedFilter = connect(mapStateToProps)(Filter);
+export default ConnectedFilter;

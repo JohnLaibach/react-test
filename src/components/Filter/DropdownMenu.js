@@ -7,6 +7,11 @@ export default class DropdownMenu extends React.Component {
         super(props);
     }
 
+    handleChangeTimePeriod = (param) => (e) => {
+        this.props.onChangeHandler(param);
+        
+    }
+
     render() {
 
         let style = {
@@ -23,7 +28,7 @@ export default class DropdownMenu extends React.Component {
         const type = this.props.type;
         const items = this.props.items;
         const selectedItems = this.props.selectedItems;
-        
+
         return (
             <ul style={style}>
                 {items.map((item, i) => <MenuItem key={i} data={item} type={type} onChangeHandler={this.props.onChangeHandler} selected={selectedItems.includes(item.value)} />)}

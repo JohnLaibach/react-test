@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 
-import filters from "./filters";
+import filtersReducer from "./filters";
 
 const initialState = {
     timePeriodFilter: 1
 }
 
 export default combineReducers({
-    filters,
-})
+    filtersReducer
+});
